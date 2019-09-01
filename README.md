@@ -1,8 +1,10 @@
-# 🚧 THIS LIBRARY IS WORK-IN-PROGRESS [#1](https://github.com/gr2m/universal-github-app-jwt-sign/pull/1)
-
 # github-app-jwt-webcrypto
 
 > Calculate a Bearer token for GitHub Apps for modern browsers
+
+[![@latest](https://img.shields.io/npm/v/github-app-jwt-webcrypto.svg)](https://www.npmjs.com/package/github-app-jwt-webcrypto)
+![Build status](https://github.com/octokit/gr2m/github-app-jwt-webcrypto/Test/badge.svg)
+[![Greenkeeper](https://badges.greenkeeper.io/gr2m/github-app-jwt-webcrypto.svg)](https://greenkeeper.io/)
 
 ⚠ The private keys provide by GitHub are in `PKCS#1` format, but the WebCrypto API only supports `PKCS#8`. You can see the difference in the first line, `PKCS#1` format starts with `-----BEGIN RSA PRIVATE KEY-----` while `PKCS#8` starts with `-----BEGIN PRIVATE KEY-----`. You can convert one format to the other using `oppenssl`:
 
