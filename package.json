@@ -1,0 +1,95 @@
+{
+  "name": "github-app-jwt-webcrypto",
+  "version": "0.0.0-development",
+  "description": "Calculate a Bearer token for GitHub Apps for modern browsers",
+  "repository": "https://github.com/gr2m/github-app-jwt-webcrypto",
+  "keywords": [
+    "github",
+    "octokit",
+    "authentication",
+    "oauth",
+    "api"
+  ],
+  "author": "Gregor Martynus (https://github.com/gr2m)",
+  "bugs": {
+    "url": "https://github.com/gr2m/github-app-jwt-webcrypto/issues"
+  },
+  "homepage": "https://github.com/gr2m/github-app-jwt-webcrypto#readme",
+  "scripts": {
+    "build": "pika build",
+    "test": "npm run test:node && npm run test:browser",
+    "test:node": "jest test/node.test.ts  --coverage",
+    "pretest:browser": "npm run -s build",
+    "test:browser": "node test/browser.test.js",
+    "lint": "prettier --check '{src,test}/**/*' README.md package.json",
+    "lint:fix": "prettier --write '{src,test}/**/*' README.md package.json"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@types/atob-lite": "^2.0.0",
+    "@types/btoa-lite": "^1.0.0",
+    "atob-lite": "^2.0.0",
+    "btoa-lite": "^1.0.0"
+  },
+  "devDependencies": {
+    "@pika/pack": "^0.5.0",
+    "@pika/plugin-build-node": "^0.6.0",
+    "@pika/plugin-build-web": "^0.6.0",
+    "@pika/plugin-bundle-web": "^0.6.0",
+    "@pika/plugin-ts-standard-pkg": "^0.6.0",
+    "@types/jest": "^24.0.18",
+    "@types/lolex": "^3.1.1",
+    "jest": "^24.9.0",
+    "lolex": "^4.2.0",
+    "node-webcrypto-ossl": "^1.0.48",
+    "prettier": "^1.18.2",
+    "puppeteer": "^1.19.0",
+    "semantic-release": "^15.13.24",
+    "serve-handler": "^6.1.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.6.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "coverageThreshold": {
+      "global": {
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      }
+    }
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ],
+      [
+        "@pika/plugin-bundle-web",
+        {
+          "browser": true
+        }
+      ]
+    ]
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github",
+      [
+        "@semantic-release/npm",
+        {
+          "pkgRoot": "./pkg"
+        }
+      ]
+    ]
+  }
+}
