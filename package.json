@@ -42,7 +42,6 @@
     "@types/lolex": "^3.1.1",
     "jest": "^24.9.0",
     "lolex": "^4.2.0",
-    "node-webcrypto-ossl": "^1.0.48",
     "prettier": "^1.18.2",
     "puppeteer": "^1.19.0",
     "semantic-release": "^15.13.24",

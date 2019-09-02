@@ -1,5 +1,4 @@
 import { install, Clock } from "lolex";
-import WebCrypto from "node-webcrypto-ossl";
 
 import { githubAppJwt } from "../src/index";
 
@@ -74,8 +73,7 @@ beforeEach(() => {
 test("README example for app auth", async () => {
   const result = await githubAppJwt({
     id: APP_ID,
-    privateKey: PRIVATE_KEY,
-    crypto: new WebCrypto()
+    privateKey: PRIVATE_KEY
   });
 
   expect(result).toStrictEqual({
@@ -88,8 +86,7 @@ test("README example for app auth", async () => {
 test("README example for app auth with private key in PKCS#8 format", async () => {
   const result = await githubAppJwt({
     id: APP_ID,
-    privateKey: PRIVATE_KEY_PKCS8,
-    crypto: new WebCrypto()
+    privateKey: PRIVATE_KEY_PKCS8
   });
 
   expect(result).toStrictEqual({
