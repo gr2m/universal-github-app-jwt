@@ -8,10 +8,10 @@
   "repository": "https://github.com/gr2m/universal-github-app-jwt",
   "keywords": [
     "github",
-    "octokit",
     "authentication",
-    "oauth",
-    "api"
+    "app",
+    "jwt",
+    "webcrypto"
   ],
   "author": "Gregor Martynus (https://github.com/gr2m)",
   "bugs": {
