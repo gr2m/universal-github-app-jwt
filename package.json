@@ -39,7 +39,7 @@
     "@pika/plugin-bundle-web": "^0.7.0",
     "@pika/plugin-ts-standard-pkg": "^0.7.0",
     "@types/jest": "^24.0.18",
-    "@types/lolex": "^3.1.1",
+    "@types/lolex": "^5.1.0",
     "jest": "^24.9.0",
     "lolex": "^5.0.0",
     "prettier": "^1.18.2",
