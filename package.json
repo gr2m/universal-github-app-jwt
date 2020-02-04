@@ -41,7 +41,7 @@
     "@types/jest": "^25.1.0",
     "@types/lolex": "^5.1.0",
     "jest": "^24.9.0",
-    "lolex": "^5.0.0",
+    "lolex": "^6.0.0",
     "prettier": "^1.18.2",
     "puppeteer": "^2.0.0",
     "semantic-release": "^17.0.0",
