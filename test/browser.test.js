@@ -1,6 +1,6 @@
 const http = require("http");
 
-const puppeteer = require("puppeteer");
+const {chromium} = require("playwright");
 const handler = require("serve-handler");
 
 // serve static files from project root
@@ -9,8 +9,9 @@ server.listen(async () => {
   const port = server.address().port;
   const url = `http://localhost:${port}/test/browser.test`;
 
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
 
   const errors = [];
   page.on("console", async data => {
