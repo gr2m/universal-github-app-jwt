@@ -30,8 +30,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.3",
-    "jsonwebtoken": "^8.5.1",
-    "playwright": "^0.13.0"
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@gr2m/pika-plugin-build-web": "^0.6.0-issue-84.1",
@@ -43,6 +42,7 @@
     "@types/lolex": "^5.1.0",
     "jest": "^25.1.0",
     "lolex": "^6.0.0",
+    "playwright": "^0.13.0",
     "prettier": "^2.0.0",
     "rollup-plugin-json": "^4.0.0",
     "semantic-release": "^17.0.0",
