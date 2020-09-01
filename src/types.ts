@@ -6,7 +6,7 @@ export type Token = string;
 export type Options = {
   id: AppId;
   privateKey: PrivateKey;
-  crypto?: Crypto;
+  timeDifference?: number;
 };
 
 export type Result = {
