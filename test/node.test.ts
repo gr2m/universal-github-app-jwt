@@ -105,10 +105,10 @@ test("Include the time difference in the expiration and issued_at field", async 
 
   expect(result).toEqual(expect.objectContaining({
     appId: APP_ID,
-    expiration: 610
+    expiration: 580
   }))
 
   const resultPayload = JSON.parse(atob(result.token.split('.')[1]))
-  expect(resultPayload.exp).toEqual(610)
-  expect(resultPayload.iat).toEqual(10)
+  expect(resultPayload.exp).toEqual(580)
+  expect(resultPayload.iat).toEqual(-20)
 })
