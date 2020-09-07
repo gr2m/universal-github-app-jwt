@@ -95,3 +95,20 @@ test("README example for app auth with private key in PKCS#8 format", async () =
     token: BEARER
   });
 });
+
+test("Include the time difference in the expiration and issued_at field", async () => {
+  const result = await githubAppJwt({
+    id: APP_ID,
+    privateKey: PRIVATE_KEY_PKCS8,
+    now: 10
+  })
+
+  expect(result).toEqual(expect.objectContaining({
+    appId: APP_ID,
+    expiration: 580
+  }))
+
+  const resultPayload = JSON.parse(atob(result.token.split('.')[1]))
+  expect(resultPayload.exp).toEqual(580)
+  expect(resultPayload.iat).toEqual(-20)
+})
