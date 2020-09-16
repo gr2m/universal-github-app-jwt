@@ -124,6 +124,17 @@ For a complete implementation of GitHub App authentication strategies, see [`@oc
         <strong>Required</strong>. Content of the <code>*.pem</code> file you downloaded from the app’s about page. You can generate a new private key if needed. Make sure to preserve the line breaks.
       </td>
     </tr>
+    <tr>
+      <th>
+        <code>options.now</code>
+      </th>
+      <th>
+        <code>number</code>
+      </th>
+      <td>
+        An optional override for the current time in seconds since the UNIX epoch. Defaults to <code>Math.floor(Date.now() / 1000))</code>. This value can be overridden to account for a time skew between the local machine and the authentication server.
+      </td>
+    </tr>
   </tbody>
 </table>
 
