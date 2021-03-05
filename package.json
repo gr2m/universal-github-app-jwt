@@ -5,7 +5,7 @@
     "./pkg/dist-src/get-token.js": "./pkg/dist-src/get-token-browser.js"
   },
   "description": "Calculate GitHub App bearer tokens for Node & modern browsers",
-  "repository": "https://github.com/gr2m/universal-github-app-jwt",
+  "repository": "github:gr2m/universal-github-app-jwt",
   "keywords": [
     "github",
     "authentication",
@@ -14,10 +14,6 @@
     "webcrypto"
   ],
   "author": "Gregor Martynus (https://github.com/gr2m)",
-  "bugs": {
-    "url": "https://github.com/gr2m/universal-github-app-jwt/issues"
-  },
-  "homepage": "https://github.com/gr2m/universal-github-app-jwt#readme",
   "scripts": {
     "build": "pika build",
     "test": "npm run test:node && npm run test:browser",
