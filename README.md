@@ -61,6 +61,15 @@ const { githubAppJwt } = require("universal-github-app-jwt");
 ```
 
 </td></tr>
+<tr><th>
+Deno
+</th><td>
+
+Deno is currently not support, we are waiting for the [Web Crypto API to land](https://github.com/denoland/deno/issues/1891).
+
+For the time being, here is [an alternative for Deno](https://github.com/gr2m/universal-github-app-jwt#issuecomment-809843153)
+
+</td></tr>
 </tbody>
 </table>
 
