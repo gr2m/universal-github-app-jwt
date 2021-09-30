@@ -40,12 +40,21 @@ When using a node, a conversion is not necessary, the implementation is agnostic
 Browsers
 </th><td width=100%>
 
-Load `universal-github-app-jwt` directly from [cdn.pika.dev](https://cdn.pika.dev)
+Load `universal-github-app-jwt` directly from [cdn.skypack.dev](https://cdn.skypack.dev)
 
 ```html
 <script type="module">
-  import { githubAppJwt } from "https://cdn.pika.dev/universal-github-app-jwt";
+  import { githubAppJwt } from "https://cdn.skypack.dev/universal-github-app-jwt";
 </script>
+```
+
+</td></tr>
+<tr><th>
+Deno
+</th><td>
+
+```js
+import { githubAppJwt } from "https://cdn.skypack.dev/universal-github-app-jwt";
 ```
 
 </td></tr>
@@ -59,15 +68,6 @@ Install with <code>npm install universal-github-app-jwt</code>
 const { githubAppJwt } = require("universal-github-app-jwt");
 // or: import { githubAppJwt } from "universal-github-app-jwt";
 ```
-
-</td></tr>
-<tr><th>
-Deno
-</th><td>
-
-Deno is currently not support, we are waiting for the [Web Crypto API to land](https://github.com/denoland/deno/issues/1891).
-
-For the time being, here is [an alternative for Deno](https://github.com/gr2m/universal-github-app-jwt#issuecomment-809843153)
 
 </td></tr>
 </tbody>
