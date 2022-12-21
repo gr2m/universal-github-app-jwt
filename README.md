@@ -2,9 +2,8 @@
 
 > Calculate GitHub App bearer tokens for Node & modern browsers
 
-[![@latest](https://img.shields.io/npm/v/universal-github-app-jwt.svg)](https://www.npmjs.com/package/universal-github-app-jwt)
-![Build status](https://github.com/gr2m/universal-github-app-jwt/workflows/Test/badge.svg)
-[![Greenkeeper](https://badges.greenkeeper.io/gr2m/universal-github-app-jwt.svg)](https://greenkeeper.io/)
+[![@latest](https://img.shields.io/npm/vuniversal-github-app-jwt.svg)](https://www.npmjs.com/packageuniversal-github-app-jwt)
+[![Build Status](https://github.com/gr2m/universal-github-app-jwt/workflows/Test/badge.svg)](https://github.com/gr2m/universal-github-app-jwt/actions?query=workflow%3ATest+branch%3Amaster)
 
 ⚠ The private keys provide by GitHub are in `PKCS#1` format, but the WebCrypto API only supports `PKCS#8`. You can see the difference in the first line, `PKCS#1` format starts with `-----BEGIN RSA PRIVATE KEY-----` while `PKCS#8` starts with `-----BEGIN PRIVATE KEY-----`. You can convert one format to the other using `oppenssl`:
 
@@ -39,22 +38,12 @@ When using a node, a conversion is not necessary, the implementation is agnostic
 <tr><th>
 Browsers
 </th><td width=100%>
-
-Load `universal-github-app-jwt` directly from [cdn.skypack.dev](https://cdn.skypack.dev)
-
+Load <code>universal-github-app-jwt</code> directly from <a href="https://esm.sh">esm.sh</a>
+        
 ```html
 <script type="module">
-  import { githubAppJwt } from "https://cdn.skypack.dev/universal-github-app-jwt";
+import githubAppJwt from "https://esm.sh/universal-github-app-jwt";
 </script>
-```
-
-</td></tr>
-<tr><th>
-Deno
-</th><td>
-
-```js
-import { githubAppJwt } from "https://cdn.skypack.dev/universal-github-app-jwt";
 ```
 
 </td></tr>
@@ -65,8 +54,18 @@ Node
 Install with <code>npm install universal-github-app-jwt</code>
 
 ```js
-const { githubAppJwt } = require("universal-github-app-jwt");
-// or: import { githubAppJwt } from "universal-github-app-jwt";
+import githubAppJwt from "universal-github-app-jwt";
+```
+
+</td></tr>
+<tr><th>
+Deno
+</th><td>
+
+Load <code>universal-github-app-jwt</code> directly from <a href="https://esm.sh">esm.sh</a>, including types.
+
+```js
+import githubAppJwt from "https://esm.sh/universal-github-app-jwt";
 ```
 
 </td></tr>
@@ -74,12 +73,10 @@ const { githubAppJwt } = require("universal-github-app-jwt");
 </table>
 
 ```js
-(async () => {
-  const { token, appId, expiration } = await githubAppJwt({
-    id: APP_ID,
-    privateKey: PRIVATE_KEY,
-  });
-})();
+const { token, appId, expiration } = await githubAppJwt({
+  id: APP_ID,
+  privateKey: PRIVATE_KEY,
+});
 ```
 
 The retrieved `token` can now be used in Authorization request header, e.g. with [`@octokit/request`](https://github.com/octokit/request.js/#readme):
