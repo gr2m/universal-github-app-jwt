@@ -21,64 +21,26 @@
   "author": "Gregor Martynus (https://github.com/gr2m)",
   "scripts": {
     "test": "npm run test:code && npm run test:tsc && npm run test:tsd && npm run lint",
-    "test:code": "c8 --100 ava test/*.test.js",
+    "test:code": "c8 --100 ava test/node.test.js",
+    "test:deno": "deno test test/deno.test.js",
     "test:tsc": "tsc --allowJs --noEmit --esModuleInterop --skipLibCheck --lib es2020 index.js",
     "test:tsd": "tsd",
     "lint": "prettier --check '{src,test}/**/*' README.md package.json",
     "lint:fix": "prettier --write '{src,test}/**/*' README.md package.json",
     "coverage": "c8 report --reporter html",
-    "postcoverage": "open-cli coverage/index.html"
+    "postcoverage": "open-cli coverage/index.html",
+    "build": "npm run build:default && npm run build:node",
+    "build:default": "esbuild index.js --bundle --outfile=dist/default.js --platform=browser --target=es2020 --format=esm",
+    "build:node": "esbuild index.js --bundle --outfile=dist/node.js --platform=node --target=es2020 --format=esm"
   },
   "license": "MIT",
   "dependencies": {
     "jsonwebtoken": "^8.5.1"
   },
-  "jest": {
-    "preset": "ts-jest",
-    "coverageThreshold": {
-      "global": {
-        "statements": 100,
-        "branches": 100,
-        "functions": 100,
-        "lines": 100
-      }
-    }
-  },
-  "@pika/pack": {
-    "pipeline": [
-      [
-        "@pika/plugin-ts-standard-pkg"
-      ],
-      [
-        "@pika/plugin-build-node"
-      ],
-      [
-        "@gr2m/pika-plugin-build-web"
-      ],
-      [
-        "@pika/plugin-bundle-web",
-        {
-          "browser": true
-        }
-      ]
-    ]
-  },
-  "release": {
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/github",
-      [
-        "@semantic-release/npm",
-        {
-          "pkgRoot": "./pkg"
-        }
-      ]
-    ]
-  },
   "devDependencies": {
     "ava": "^5.1.0",
     "c8": "^7.12.0",
+    "esbuild": "^0.16.10",
     "mockdate": "^3.0.5",
     "open-cli": "^7.1.0",
     "prettier": "^2.8.1",
