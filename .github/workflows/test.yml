@@ -21,7 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
+      - run: npm run build:default
       - run: npm run test:deno
