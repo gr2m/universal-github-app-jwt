@@ -1,17 +1,33 @@
-"on":
-  - push
-  - pull_request
 name: Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+
 jobs:
-  npmCi:
-    name: test
+  node:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: lts/*
+          node-version: 18
           cache: npm
-      - uses: microsoft/playwright-github-action@v1
       - run: npm ci
       - run: npm test
+  deno:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - run: npm ci
+      - run: npm run build:default
+      - run: npm run test:deno

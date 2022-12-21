@@ -1,6 +1,7 @@
-import { install, Clock } from "lolex";
+import test from "ava";
+import MockDate from "mockdate";
 
-import { githubAppJwt } from "../src/index";
+import githubAppJwt from "../index.js";
 
 const APP_ID = 1;
 const PRIVATE_KEY = `-----BEGIN RSA PRIVATE KEY-----
@@ -65,50 +66,49 @@ w23mINkUK1qlFoq3o69IHDLz
 const BEARER =
   "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOi0zMCwiZXhwIjo1NzAsImlzcyI6MX0.q3foRa78U3WegM5PrWLEh5N0bH1SD62OqW66ZYzArp95JBNiCbo8KAlGtiRENCIfBZT9ibDUWy82cI4g3F09mdTq3bD1xLavIfmTksIQCz5EymTWR5v6gL14LSmQdWY9lSqkgUG0XCFljWUglEP39H4yeHbFgdjvAYg3ifDS12z9oQz2ACdSpvxPiTuCC804HkPVw8Qoy0OSXvCkFU70l7VXCVUxnuhHnk8-oCGcKUspmeP6UdDnXk-Aus-eGwDfJbU2WritxxaXw6B4a3flTPojkYLSkPBr6Pi0H2-mBsW_Nvs0aLPVLKobQd4gqTkosX3967DoAG8luUMhrnxe8Q";
 
-let clock: Clock;
-beforeEach(() => {
-  clock = install({ now: 0, toFake: ["Date", "setTimeout"] });
-});
+test("README example for app auth", async (t) => {
+  MockDate.set(0);
 
-test("README example for app auth", async () => {
   const result = await githubAppJwt({
     id: APP_ID,
-    privateKey: PRIVATE_KEY
+    privateKey: PRIVATE_KEY,
   });
 
-  expect(result).toStrictEqual({
+  t.deepEqual(result, {
     appId: APP_ID,
     expiration: 570,
-    token: BEARER
+    token: BEARER,
   });
 });
 
-test("README example for app auth with private key in PKCS#8 format", async () => {
-  const result = await githubAppJwt({
-    id: APP_ID,
-    privateKey: PRIVATE_KEY_PKCS8
-  });
+test("README example for app auth with private key in PKCS#8 format", async (t) => {
+  MockDate.set(0);
 
-  expect(result).toStrictEqual({
-    appId: APP_ID,
-    expiration: 570,
-    token: BEARER
-  });
-});
-
-test("Include the time difference in the expiration and issued_at field", async () => {
   const result = await githubAppJwt({
     id: APP_ID,
     privateKey: PRIVATE_KEY_PKCS8,
-    now: 10
-  })
+  });
 
-  expect(result).toEqual(expect.objectContaining({
+  t.deepEqual(result, {
     appId: APP_ID,
-    expiration: 580
-  }))
+    expiration: 570,
+    token: BEARER,
+  });
+});
 
-  const resultPayload = JSON.parse(atob(result.token.split('.')[1]))
-  expect(resultPayload.exp).toEqual(580)
-  expect(resultPayload.iat).toEqual(-20)
-})
+test("Include the time difference in the expiration and issued_at field", async (t) => {
+  MockDate.set(0);
+
+  const result = await githubAppJwt({
+    id: APP_ID,
+    privateKey: PRIVATE_KEY_PKCS8,
+    now: 10,
+  });
+
+  t.is(result.appId, APP_ID);
+  t.is(result.expiration, 580);
+
+  const resultPayload = JSON.parse(atob(result.token.split(".")[1]));
+  t.is(resultPayload.exp, 580);
+  t.is(resultPayload.iat, -20);
+});
