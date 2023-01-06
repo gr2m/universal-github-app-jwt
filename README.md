@@ -68,7 +68,7 @@ const { githubAppJwt } = require("universal-github-app-jwt");
 (async () => {
   const { token, appId, expiration } = await githubAppJwt({
     id: APP_ID,
-    privateKey: PRIVATE_KEY
+    privateKey: PRIVATE_KEY,
   });
 })();
 ```
@@ -78,8 +78,8 @@ The retrieved `token` can now be used in Authorization request header, e.g. with
 ```js
 request("GET /app", {
   headers: {
-    authorization: `bearer ${token}`
-  }
+    authorization: `bearer ${token}`,
+  },
 });
 ```
 

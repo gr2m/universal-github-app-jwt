@@ -3,12 +3,12 @@ import {
   getEncodedMessage,
   getDERfromPEM,
   string2ArrayBuffer,
-  base64encode
+  base64encode,
 } from "./utils";
 
 export const getToken = async ({
   privateKey,
-  payload
+  payload,
 }: GetTokenOptions): Promise<Token> => {
   // WebCrypto only supports PKCS#8, unfortunately
   if (/BEGIN RSA PRIVATE KEY/.test(privateKey)) {
@@ -19,7 +19,7 @@ export const getToken = async ({
 
   const algorithm = {
     name: "RSASSA-PKCS1-v1_5",
-    hash: { name: "SHA-256" }
+    hash: { name: "SHA-256" },
   };
   const header = { alg: "RS256", typ: "JWT" };
 
