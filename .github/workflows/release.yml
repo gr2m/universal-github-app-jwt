@@ -1,17 +1,21 @@
 on:
   push:
     branches:
+      - "*.x"
       - master
+      - next
+      - beta
 name: Release
 jobs:
   build:
     name: release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: "12.x"
+          node-version: 18
+          cache: npm
       - run: npm ci
       - run: npm run build
       - run: npx semantic-release
