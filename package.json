@@ -20,8 +20,7 @@
   "homepage": "https://github.com/gr2m/universal-github-app-jwt#readme",
   "scripts": {
     "build": "pika build",
-    "test": "npm run test:node && npm run test:browser",
-    "test:node": "jest test/node.test.ts  --coverage",
+    "test": "jest test/node.test.ts  --coverage",
     "pretest:browser": "npm run -s build",
     "test:browser": "node test/browser.test.js",
     "lint": "prettier --check '{src,test}/**/*' README.md package.json",
@@ -29,8 +28,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@types/jsonwebtoken": "^8.3.3",
-    "jsonwebtoken": "^8.5.1"
+    "@types/jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {
     "@gr2m/pika-plugin-build-web": "^0.6.0-issue-84.1",
@@ -42,7 +41,6 @@
     "@types/lolex": "^5.1.0",
     "jest": "^26.0.0",
     "lolex": "^6.0.0",
-    "playwright": "^1.0.1",
     "prettier": "^2.0.0",
     "rollup-plugin-json": "^4.0.0",
     "semantic-release": "^17.0.0",

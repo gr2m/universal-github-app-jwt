@@ -4,9 +4,9 @@ import { GetTokenOptions, Token } from "./types";
 
 export async function getToken({
   privateKey,
-  payload
+  payload,
 }: GetTokenOptions): Promise<Token> {
   return jsonwebtoken.sign(payload, privateKey, {
-    algorithm: "RS256"
+    algorithm: "RS256",
   });
 }

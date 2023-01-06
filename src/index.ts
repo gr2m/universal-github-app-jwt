@@ -11,23 +11,23 @@ export async function githubAppJwt({
   // in the past as we have seen people running situations where the GitHub API
   // claimed the iat would be in future. It turned out the clocks on the
   // different machine were not in sync.
-  const nowWithSafetyMargin = now - 30
+  const nowWithSafetyMargin = now - 30;
   const expiration = nowWithSafetyMargin + 60 * 10; // JWT expiration time (10 minute maximum)
 
   const payload = {
     iat: nowWithSafetyMargin, // Issued at time
     exp: expiration,
-    iss: id
+    iss: id,
   };
 
   const token = await getToken({
     privateKey,
-    payload
+    payload,
   });
 
   return {
     appId: id,
     expiration,
-    token
+    token,
   };
 }

@@ -5,9 +5,7 @@
     <title>Test</title>
   </head>
   <body>
-    <p>
-      see logs in developer console
-    </p>
+    <p>see logs in developer console</p>
     <script src="../node_modules/lolex/lolex.js"></script>
     <script type="module">
       (async () => {
@@ -86,7 +84,7 @@ w23mINkUK1qlFoq3o69IHDLz
 
         const result = await githubAppJwt({
           id: APP_ID,
-          privateKey: PRIVATE_KEY_PKCS8
+          privateKey: PRIVATE_KEY_PKCS8,
         });
 
         console.assert(
@@ -105,7 +103,7 @@ w23mINkUK1qlFoq3o69IHDLz
         try {
           const result = await githubAppJwt({
             id: APP_ID,
-            privateKey: PRIVATE_KEY
+            privateKey: PRIVATE_KEY,
           });
           console.assert(
             false,

@@ -34,10 +34,7 @@ export function base64encode(buffer: ArrayBuffer): string {
 }
 
 function fromBase64(base64: string): string {
-  return base64
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
+  return base64.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
 }
 
 function base64encodeJSON(obj: object) {

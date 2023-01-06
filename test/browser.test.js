@@ -1,6 +1,6 @@
 const http = require("http");
 
-const {chromium} = require("playwright");
+const { chromium } = require("playwright");
 const handler = require("serve-handler");
 
 // serve static files from project root
@@ -14,7 +14,7 @@ server.listen(async () => {
   const page = await context.newPage();
 
   const errors = [];
-  page.on("console", async data => {
+  page.on("console", async (data) => {
     const msg = String(data.args()[0]).substr("JSHandle:".length);
     if (msg === "done.") {
       await browser.close();
