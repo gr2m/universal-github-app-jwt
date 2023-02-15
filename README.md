@@ -31,6 +31,22 @@ const privateKeyPkcs8 = key.exportKey("pkcs8-private-pem");
 
 When using a node, a conversion is not necessary, the implementation is agnostic to either format.
 
+However, if you got the error `Private Key is in PKCS#1 format, but only PKCS#8 is supported.` inside Node.js, it is possible that your bundler or your app framework incorrectly bundled the web version instead of the node version ([example](https://github.com/backstage/backstage/issues/9959)).
+
+You can also convert `PKCS#1` to `PKCS#8` in Node.js using the built-in `crypto` module:
+
+```js
+const crypto = require('crypto');
+const PRIVATE_KEY = `-----BEGIN RSA PRIVATE KEY-----
+...
+-----END RSA PRIVATE KEY-----`;
+
+const privateKeyPkcs8 = crypto.createPrivateKey(PRIVATE_KEY).export({
+  type: 'pkcs8',
+  format: 'pem',
+})
+```
+
 ## Usage
 
 <table>
