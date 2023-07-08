@@ -62,6 +62,37 @@ SrOlxDpE+88rX/uDQ0ieaM8x5s/Qrp5I/HT3/j0npZMP74RqM3sWGS1RJjG6R1Zo
 KhwBAlMM1g/Qrzwbiu0LYhjLkkWf1JbPmiHH//S77N39H9BFTMs7Dg3vb8e75Qbo
 w23mINkUK1qlFoq3o69IHDLz
 -----END PRIVATE KEY-----`;
+
+// openssh version of the key above
+// see https://github.com/gr2m/universal-github-app-jwt/issues/72
+const PRIVATEY_KEY_OPENSSH = `-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAQEA1c7+9z5Pad7OejecsQ0bu3aozN3tihPmljnnudb9G3HECdnHlWu2
+/a1gB9JW5TBQ+AVpum9Okx7KfqkfBKL9mcHgSL0yWMdjMfNOqNtrQqKlN4kEp6RD++7sGb
+zbfZ9arwrlD/HSDAWGdGGJTSOBM6pHehyLmSC3DJoR/CTu0vTGTWXQrO64Z8tyXQPtVPb/
+YXrcUhbBp8i72b9Xky0fD6PkEebOy0Ip58XVAn2UPNlNOSPSye+Qjtius0Md4Nie4+X8kw
+VI2Qjk3dSm0sw/720KJkdVDmrayeljtKBx6AtNQsSXgzQbeMmiqFFkwrG1+zx6E7H7jqIQ
+9B6bvWKXGwAAA7hJqTyJSak8iQAAAAdzc2gtcnNhAAABAQDVzv73Pk9p3s56N5yxDRu7dq
+jM3e2KE+aWOee51v0bccQJ2ceVa7b9rWAH0lblMFD4BWm6b06THsp+qR8Eov2ZweBIvTJY
+x2Mx806o22tCoqU3iQSnpEP77uwZvNt9n1qvCuUP8dIMBYZ0YYlNI4Ezqkd6HIuZILcMmh
+H8JO7S9MZNZdCs7rhny3JdA+1U9v9hetxSFsGnyLvZv1eTLR8Po+QR5s7LQinnxdUCfZQ8
+2U05I9LJ75CO2K6zQx3g2J7j5fyTBUjZCOTd1KbSzD/vbQomR1UOatrJ6WO0oHHoC01CxJ
+eDNBt4yaKoUWTCsbX7PHoTsfuOohD0Hpu9YpcbAAAAAwEAAQAAAQA/JAQTy+jz4QKlASta
+9f4MnHw5FAkET+A22R7fuOfCZRR5vEC+lbLSs5K6fJmA0YX32NFiZ2CS/fLa+OLaIbA26h
+RsJsNpiGh45duC7ll8sj+MaQBg6ZfSHLrI1wcS0C6dpuACl21qc29Di1Ja33NWaKD3JNrs
++8ZTCGTrS5Tj4y89g7no1XtuCXMMB860FijnwNdUf/XudA1bHoZ0h/8OOkO+t8uCNBNwSK
+FDLKJRCs4dsnQAMs5IGmxkAVLmpmaLTX7yaA13gotSw/MjQlsk5WKSWSQw16KAVORALAr4
+TdbEkaGl1q5TEgwe6/xPmkMirmuCjjar5qCbgttb0inhAAAAgQDOYPZ2JGmhibqKjjLFm0
+qzpcQ6RPvPK1/7g0NInmjPMebP0K6eSPx09/49J6WTD++EajN7FhktUSYxukdWaCocAQJT
+DNYP0K88G4rtC2IYy5JFn9SWz5ohx//0u+zd/R/QRUzLOw4N72/Hu+UG6MNt5iDZFCtapR
+aKt6OvSBwy8wAAAIEA7yW6wBkVoNhgXnk8XSZv3W+Q0xtdVpidJeNGBWnczlZrummt4xw3
+xs6zV+rGUDy59yDkKwBKjMMa42Mni7T9Fx8+EKUuhVK3PVQyajoyQqFwT1GORJNzc/eYQ6
+VYOCSC8OyZmsBM2p+0D4FF2/abwSPMmy0NgyFLCUFVc3OECpkAAACBAOTgJiN8LebPnJYN
+fKkuwSkdg7jhVq8zVXB2F4Y8fLzklldN9zst8r3VAQIbvQNS1KqcMjGvrpyIMZr5lDEBHc
+h0DHIAbFbNdHUf4NsRozC3MI+pJ/sa9yVSGZ20U+dGLj4X/p7NUnHYT+rqaPSNP7EbCLjf
+ehm+uSScfeIEOJPTAAAAAAEC
+-----END OPENSSH PRIVATE KEY-----`;
+
 // see https://runkit.com/gr2m/reproducable-jwt
 const BEARER =
   "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOi0zMCwiZXhwIjo1NzAsImlzcyI6MX0.q3foRa78U3WegM5PrWLEh5N0bH1SD62OqW66ZYzArp95JBNiCbo8KAlGtiRENCIfBZT9ibDUWy82cI4g3F09mdTq3bD1xLavIfmTksIQCz5EymTWR5v6gL14LSmQdWY9lSqkgUG0XCFljWUglEP39H4yeHbFgdjvAYg3ifDS12z9oQz2ACdSpvxPiTuCC804HkPVw8Qoy0OSXvCkFU70l7VXCVUxnuhHnk8-oCGcKUspmeP6UdDnXk-Aus-eGwDfJbU2WritxxaXw6B4a3flTPojkYLSkPBr6Pi0H2-mBsW_Nvs0aLPVLKobQd4gqTkosX3967DoAG8luUMhrnxe8Q";
@@ -94,6 +125,23 @@ test("README example for app auth with private key in PKCS#8 format", async (t) 
     expiration: 570,
     token: BEARER,
   });
+});
+
+test("Throw error if key is OpenSSH", async (t) => {
+  MockDate.set(0);
+
+  try {
+    await githubAppJwt({
+      id: APP_ID,
+      privateKey: PRIVATEY_KEY_OPENSSH,
+    });
+    t.fail("should throw");
+  } catch (error) {
+    t.is(
+      error.message,
+      "[universal-github-app-jwt] Private Key is in OpenSSH format, but only PKCS is supported. See https://github.com/gr2m/universal-github-app-jwt#readme"
+    );
+  }
 });
 
 test("Include the time difference in the expiration and issued_at field", async (t) => {
