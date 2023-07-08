@@ -5,47 +5,39 @@
 [![@latest](https://img.shields.io/npm/vuniversal-github-app-jwt.svg)](https://www.npmjs.com/packageuniversal-github-app-jwt)
 [![Build Status](https://github.com/gr2m/universal-github-app-jwt/workflows/Test/badge.svg)](https://github.com/gr2m/universal-github-app-jwt/actions?query=workflow%3ATest+branch%3Amaster)
 
-⚠ The private keys provide by GitHub are in `PKCS#1` format, but the WebCrypto API only supports `PKCS#8`. You can see the difference in the first line, `PKCS#1` format starts with `-----BEGIN RSA PRIVATE KEY-----` while `PKCS#8` starts with `-----BEGIN PRIVATE KEY-----`. You can convert one format to the other using `oppenssl`:
+⚠ The private keys provide by GitHub are in `PKCS#1` format, but the WebCrypto API only supports `PKCS#8`. And neither Node nor the WEbCrypto API supports private keys in the `OpenSSH` format. You can see the difference in the first line, `PKCS#1` format starts with `-----BEGIN RSA PRIVATE KEY-----` while `PKCS#8` starts with `-----BEGIN PRIVATE KEY-----`, and `OpenSSH` starts with `-----BEGIN OPENSSH PRIVATE KEY-----`.
+
+You can convert `PKCS#1` to `PKCS#8` using `oppenssl`:
 
 ```
 openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in private-key.pem -out private-key-pkcs8.key
 ```
 
-It's also possible to convert the formats with JavaScript, e.g. using [node-rsa](https://github.com/rzcoder/node-rsa), but it turns a 4kb to a 200kb+ built. I'm looking for help to create a minimal `PKCS#1` to `PKCS#8` convert library that I can recommend people to use before passing the private key to `githubAppJwt`. Please create an issue if you'd like to help.
+You can convert `OpenSSH` to `PKCS#8` using `ssh-keygen`:
 
-The way it works with `node-rsa` is this
-
-```js
-const PRIVATE_KEY = `-----BEGIN RSA PRIVATE KEY-----
-...
------END RSA PRIVATE KEY-----`;
-
-const key = new NodeRSA(PRIVATE_KEY);
-const privateKeyPkcs8 = key.exportKey("pkcs8-private-pem");
-
-// privateKeyPkcs8 is now
-// -----BEGIN PRIVATE KEY-----
-// ...
-// -----END PRIVATE KEY-----
+```
+cp private-key.pem private-key-pkcs8.key && ssh-keygen -m PKCS8  -N "" -f private-key-pkcs8.key
 ```
 
-When using a node, a conversion is not necessary, the implementation is agnostic to either format.
+It's also possible to convert the formats with JavaScript, e.g. using [node-rsa](https://github.com/rzcoder/node-rsa), but it turns a 4kb to a 200kb+ built. I'm looking for help to create a minimal `PKCS#1` to `PKCS#8` convert library that I can recommend people to use before passing the private key to `githubAppJwt`. Please create an issue if you'd like to help. The same to convert `OpenSSH` to `PKCS#8`.
 
-However, if you got the error `Private Key is in PKCS#1 format, but only PKCS#8 is supported.` inside Node.js, it is possible that your bundler or your app framework incorrectly bundled the web version instead of the node version ([example](https://github.com/backstage/backstage/issues/9959)).
-
-You can also convert `PKCS#1` to `PKCS#8` in Node.js using the built-in `crypto` module:
+You can convert `PKCS#1` to `PKCS#8` in Node.js using the built-in `crypto` module:
 
 ```js
-const crypto = require('crypto');
+const crypto = require("crypto");
 const PRIVATE_KEY = `-----BEGIN RSA PRIVATE KEY-----
 ...
 -----END RSA PRIVATE KEY-----`;
 
 const privateKeyPkcs8 = crypto.createPrivateKey(PRIVATE_KEY).export({
-  type: 'pkcs8',
-  format: 'pem',
-})
+  type: "pkcs8",
+  format: "pem",
+});
 ```
+
+When using a node, a conversion is not necessary, the implementation is agnostic to either `PKCS` format.
+
+However, if you got the error `Private Key is in PKCS#1 format, but only PKCS#8 is supported.` inside Node.js, it is possible that your bundler or your app framework incorrectly bundled the web version instead of the node version ([example](https://github.com/backstage/backstage/issues/9959)).
 
 ## Usage
 
