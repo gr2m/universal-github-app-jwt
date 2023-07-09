@@ -1,7 +1,7 @@
 // @ts-check
 
 // @ts-ignore - #get-token is defined in "imports" in package.json
-import { getToken } from "#get-token";
+import { getToken } from "./lib/get-token.js";
 
 /**
  * @param {import(".").Options} options
