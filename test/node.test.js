@@ -1,10 +1,14 @@
 import test from "ava";
 import MockDate from "mockdate";
 
+import crypto from "node:crypto";
+
 import githubAppJwt from "../index.js";
 
 const APP_ID = 1;
-const PRIVATE_KEY = `-----BEGIN RSA PRIVATE KEY-----
+
+// private key in pkcs1 format, as it's provided by GitHub
+const PRIVATE_KEY_PKCS1 = `-----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA1c7+9z5Pad7OejecsQ0bu3aozN3tihPmljnnudb9G3HECdnH
 lWu2/a1gB9JW5TBQ+AVpum9Okx7KfqkfBKL9mcHgSL0yWMdjMfNOqNtrQqKlN4kE
 p6RD++7sGbzbfZ9arwrlD/HSDAWGdGGJTSOBM6pHehyLmSC3DJoR/CTu0vTGTWXQ
@@ -97,21 +101,6 @@ ehm+uSScfeIEOJPTAAAAAAEC
 const BEARER =
   "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOi0zMCwiZXhwIjo1NzAsImlzcyI6MX0.q3foRa78U3WegM5PrWLEh5N0bH1SD62OqW66ZYzArp95JBNiCbo8KAlGtiRENCIfBZT9ibDUWy82cI4g3F09mdTq3bD1xLavIfmTksIQCz5EymTWR5v6gL14LSmQdWY9lSqkgUG0XCFljWUglEP39H4yeHbFgdjvAYg3ifDS12z9oQz2ACdSpvxPiTuCC804HkPVw8Qoy0OSXvCkFU70l7VXCVUxnuhHnk8-oCGcKUspmeP6UdDnXk-Aus-eGwDfJbU2WritxxaXw6B4a3flTPojkYLSkPBr6Pi0H2-mBsW_Nvs0aLPVLKobQd4gqTkosX3967DoAG8luUMhrnxe8Q";
 
-test("README example for app auth", async (t) => {
-  MockDate.set(0);
-
-  const result = await githubAppJwt({
-    id: APP_ID,
-    privateKey: PRIVATE_KEY,
-  });
-
-  t.deepEqual(result, {
-    appId: APP_ID,
-    expiration: 570,
-    token: BEARER,
-  });
-});
-
 test("README example for app auth with private key in PKCS#8 format", async (t) => {
   MockDate.set(0);
 
@@ -127,7 +116,22 @@ test("README example for app auth with private key in PKCS#8 format", async (t) 
   });
 });
 
-test("Throw error if key is OpenSSH", async (t) => {
+test("README example for app auth with private key in PKCS#1 format", async (t) => {
+  MockDate.set(0);
+
+  const result = await githubAppJwt({
+    id: APP_ID,
+    privateKey: PRIVATE_KEY_PKCS1,
+  });
+
+  t.deepEqual(result, {
+    appId: APP_ID,
+    expiration: 570,
+    token: BEARER,
+  });
+});
+
+test("Throws error if key is OpenSSH", async (t) => {
   MockDate.set(0);
 
   try {
@@ -139,7 +143,7 @@ test("Throw error if key is OpenSSH", async (t) => {
   } catch (error) {
     t.is(
       error.message,
-      "[universal-github-app-jwt] Private Key is in OpenSSH format, but only PKCS is supported. See https://github.com/gr2m/universal-github-app-jwt#readme"
+      "[universal-github-app-jwt] Private Key is in OpenSSH format, but only PKCS#8 is supported. See https://github.com/gr2m/universal-github-app-jwt#readme"
     );
   }
 });
