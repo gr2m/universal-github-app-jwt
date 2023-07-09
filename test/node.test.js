@@ -1,8 +1,6 @@
 import test from "ava";
 import MockDate from "mockdate";
 
-import crypto from "node:crypto";
-
 import githubAppJwt from "../index.js";
 
 const APP_ID = 1;
