@@ -2,7 +2,7 @@
 
 > Calculate GitHub App bearer tokens for Node, Deno, and modern browsers
 
-[![@latest](https://img.shields.io/npm/universal-github-app-jwt.svg)](https://www.npmjs.com/universal-github-app-jwt)
+[![@latest](https://img.shields.io/npm/v/universal-github-app-jwt)](https://www.npmjs.com/universal-github-app-jwt)
 [![Build Status](https://github.com/gr2m/universal-github-app-jwt/workflows/Test/badge.svg)](https://github.com/gr2m/universal-github-app-jwt/actions?query=workflow%3ATest+branch%3Amaster)
 
 ## Usage
