@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.0",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@gr2m/pika-plugin-build-web": "^0.6.0-issue-84.1",
