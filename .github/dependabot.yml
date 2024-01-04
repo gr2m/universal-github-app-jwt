@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    target-branch: "v1.x"
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'npm'
+    directory: '/'
+    target-branch: "main"
+    schedule:
+      interval: 'daily'
