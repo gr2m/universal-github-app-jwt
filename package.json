@@ -54,5 +54,10 @@
         "prerelease": true
       }
     ]
+  },
+  "renovate": {
+    "extends": [
+      "github>gr2m/.github"
+    ]
   }
 }
