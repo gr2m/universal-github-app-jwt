@@ -141,7 +141,7 @@ test("Throws error if key is OpenSSH", async (t) => {
   } catch (error) {
     t.is(
       error.message,
-      "[universal-github-app-jwt] Private Key is in OpenSSH format, but only PKCS#8 is supported. See https://github.com/gr2m/universal-github-app-jwt#private-key-formats"
+      "[universal-github-app-jwt] Private Key is in OpenSSH format, but only PKCS#8 is supported. See https://github.com/gr2m/universal-github-app-jwt#private-key-formats",
     );
   }
 });
