@@ -200,7 +200,7 @@ import githubAppJwt from "universal-github-app-jwt";
 const privateKeyPkcs8 = crypto.createPrivateKey(process.env.PRIVATE_KEY).export({
   type: "pkcs8",
   format: "pem",
-}
+});
 
 const { token, appId, expiration } = await githubAppJwt({
   id: process.env.APP_ID,
