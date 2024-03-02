@@ -191,6 +191,10 @@ You can identify the format based on the the first line
 
 ### Converting `PKCS#1` to `PKCS#8`
 
+- #### Using an Online Private Key Converter
+
+Convert quickly using the Web interface at https://private-key-converter.vercel.app
+
 - #### Using Node.js
 
 If you use Node.js, you can convert the format before passing it to `universal-github-app-jwt`:
@@ -219,10 +223,6 @@ Convert the format using `openssl` before passing it to your app.
 ```
 openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in private-key.pem -out private-key-pkcs8.key
 ```
-
-- #### Using an Online Private Key Converter
-
-Convert quickly using the Web interface at https://private-key-converter.vercel.app
 
 ### Converting `OpenSSH` to `PKCS#8`
 
