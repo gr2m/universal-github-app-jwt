@@ -162,3 +162,18 @@ test("Include the time difference in the expiration and issued_at field", async 
   t.is(resultPayload.exp, 580);
   t.is(resultPayload.iat, -20);
 });
+
+test("Replace escaped line breaks with actual linebreaks", async (t) => {
+  MockDate.set(0);
+
+  const result = await githubAppJwt({
+    id: APP_ID,
+    privateKey: PRIVATE_KEY_PKCS8.replace(/\n/g, "\\n"),
+  });
+
+  t.deepEqual(result, {
+    appId: APP_ID,
+    expiration: 570,
+    token: BEARER,
+  });
+});
