@@ -12,6 +12,10 @@ export default async function githubAppJwt({
   privateKey,
   now = Math.floor(Date.now() / 1000),
 }) {
+  // Private keys are often times configured as environment variables, in which case line breaks are escaped using `\\n`.
+  // Replace these here for convenience.
+  const privateKeyWithNewlines = privateKey.replace(/\\n/g, '\n');
+
   // When creating a JSON Web Token, it sets the "issued at time" (iat) to 30s
   // in the past as we have seen people running situations where the GitHub API
   // claimed the iat would be in future. It turned out the clocks on the
@@ -26,7 +30,7 @@ export default async function githubAppJwt({
   };
 
   const token = await getToken({
-    privateKey,
+    privateKey: privateKeyWithNewlines,
     payload,
   });
 
