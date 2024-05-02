@@ -11,3 +11,15 @@ export async function test() {
   expectType<number>(result.expiration);
   expectType<string>(result.token);
 }
+
+// Test case to verify `id` can be set to a string
+export async function testWithStringId() {
+  const resultWithStringId = await githubAppJwt({
+    id: "client_id_string",
+    privateKey: "",
+  });
+
+  expectType<number>(resultWithStringId.appId);
+  expectType<number>(resultWithStringId.expiration);
+  expectType<string>(resultWithStringId.token);
+}

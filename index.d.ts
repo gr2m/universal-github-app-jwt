@@ -1,11 +1,11 @@
 export type Options = {
-  id: number;
+  id: number | string;
   privateKey: string;
   now?: number;
 };
 
 export type Result = {
-  appId: number;
+  appId: number | string;
   expiration: number;
   token: string;
 };
