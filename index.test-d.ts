@@ -7,7 +7,7 @@ export async function test() {
     privateKey: "",
   });
 
-  expectType<number>(result.appId);
+  expectType<number | string>(result.appId);
   expectType<number>(result.expiration);
   expectType<string>(result.token);
 }
