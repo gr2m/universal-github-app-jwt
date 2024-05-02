@@ -177,3 +177,16 @@ test("Replace escaped line breaks with actual linebreaks", async (t) => {
     token: BEARER,
   });
 });
+
+// New test for id set to Client ID
+test("id set to Client ID", async (t) => {
+  MockDate.set(0);
+
+  const result = await githubAppJwt({
+    id: "client_id_string",
+    privateKey: PRIVATE_KEY_PKCS8,
+  });
+
+  t.is(typeof result.token, "string");
+  t.is(result.appId, "client_id_string");
+});
