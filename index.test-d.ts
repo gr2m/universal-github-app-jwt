@@ -19,7 +19,7 @@ export async function testWithStringId() {
     privateKey: "",
   });
 
-  expectType<number>(resultWithStringId.appId);
+  expectType<number | string>(resultWithStringId.appId);
   expectType<number>(resultWithStringId.expiration);
   expectType<string>(resultWithStringId.token);
 }
