@@ -7,7 +7,7 @@ export async function test() {
     privateKey: "",
   });
 
-  expectType<number | string>(result.appId);
+  expectType<number>(result.appId);
   expectType<number>(result.expiration);
   expectType<string>(result.token);
 }
@@ -19,7 +19,7 @@ export async function testWithStringId() {
     privateKey: "",
   });
 
-  expectType<number | string>(resultWithStringId.appId);
+  expectType<string>(resultWithStringId.appId);
   expectType<number>(resultWithStringId.expiration);
   expectType<string>(resultWithStringId.token);
 }
