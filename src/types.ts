@@ -1,16 +1,15 @@
 export type PrivateKey = string;
-export type AppId = number;
 export type Expiration = number;
 export type Token = string;
 
-export type Options = {
-  id: AppId;
+export type Options<IdType extends number | string = number> = {
+  id: IdType;
   privateKey: PrivateKey;
   now?: number;
 };
 
-export type Result = {
-  appId: AppId;
+export type Result<IdType extends number | string = number> = {
+  appId: IdType;
   expiration: Expiration;
   token: Token;
 };
@@ -18,7 +17,7 @@ export type Result = {
 export type Payload = {
   iat: number;
   exp: number;
-  iss: number;
+  iss: number | string;
 };
 
 export type GetTokenOptions = {

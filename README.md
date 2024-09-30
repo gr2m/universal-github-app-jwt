@@ -107,10 +107,10 @@ For a complete implementation of GitHub App authentication strategies, see [`@oc
         <code>options.id</code>
       </th>
       <th>
-        <code>number</code>
+        <code>number | string</code>
       </th>
       <td>
-        <strong>Required</strong>. Find <strong>App ID</strong> on the app’s about page in settings.
+        <strong>Required</strong>. The GitHub App's ID or Client ID. For <code>github.com</code> and GHES 3.14+, it is recommended to use the Client ID.
       </td>
     </tr>
     <tr>
@@ -163,7 +163,7 @@ For a complete implementation of GitHub App authentication strategies, see [`@oc
         <code>number</code>
       </th>
       <td>
-        The GitHub App database ID passed in <code>options.id</code>.
+        The GitHub App database ID or Client ID passed in <code>options.id</code>.
       </td>
     </tr>
     <tr>

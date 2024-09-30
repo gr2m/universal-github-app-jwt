@@ -2,11 +2,11 @@ import { getToken } from "./get-token";
 
 import { Options, Result } from "./types";
 
-export async function githubAppJwt({
+export async function githubAppJwt<T extends number | string = number>({
   id,
   privateKey,
   now = Math.floor(Date.now() / 1000),
-}: Options): Promise<Result> {
+}: Options<T>): Promise<Result<T>> {
   // When creating a JSON Web Token, it sets the "issued at time" (iat) to 30s
   // in the past as we have seen people running situations where the GitHub API
   // claimed the iat would be in future. It turned out the clocks on the
