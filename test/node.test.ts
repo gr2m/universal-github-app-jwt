@@ -116,14 +116,12 @@ test("Include the time difference in the expiration and issued_at field", async 
 });
 
 // New test for id set to Client ID
-test("id set to Client ID", async (t) => {
-  MockDate.set(0);
-
+test("id set to Client ID", async () => {
   const result = await githubAppJwt({
     id: "client_id_string",
     privateKey: PRIVATE_KEY_PKCS8,
   });
 
-  t.is(typeof result.token, "string");
-  t.is(result.appId, "client_id_string");
+  expect(typeof result.token).toEqual("string");
+  expect(result.appId).toEqual("client_id_string");
 });
