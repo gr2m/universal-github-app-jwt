@@ -28,6 +28,6 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
-      - run: npm ci
-      - run: npm run build:default
-      - run: npm run test:deno
+      - run: deno install
+      - run: deno run build:default
+      - run: deno run test:deno
