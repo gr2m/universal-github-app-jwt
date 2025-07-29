@@ -1,8 +1,45 @@
 // @ts-check
 
 import { describe, test, expect } from "vitest";
-import githubAppJwtNode from "../index.js";
+import githubAppJwtNode from "../dist/node.js";
 import githubAppJwtDefault from "../dist/default.js";
+
+if (process.versions.deno) {
+  if (process.env.TEST_ENVIRONMENT !== "DENO") {
+    console.error(
+      "Running tests in Deno environment requires TEST_ENVIRONMENT to be set to 'DENO'.",
+    );
+    process.exit(1);
+  }
+  console.log("Running tests in Deno environment");
+} else if (process.versions.bun) {
+  if (process.env.TEST_ENVIRONMENT !== "BUN") {
+    console.error(
+      "Running tests in Bun environment requires TEST_ENVIRONMENT to be set to 'BUN'.",
+    );
+    process.exit(1);
+  }
+  console.log("Running tests in Bun environment");
+} else if (globalThis.EdgeRuntime) {
+  if (process.env.TEST_ENVIRONMENT !== "EDGE") {
+    console.error(
+      "Running tests in edge environment requires TEST_ENVIRONMENT to be set to 'EDGE'.",
+    );
+    process.exit(1);
+  }
+  console.log("Running tests in Edge Runtime environment");
+} else if (process.versions.node) {
+  if (process.env.TEST_ENVIRONMENT !== "NODE") {
+    console.error(
+      "Running tests in Node environment requires TEST_ENVIRONMENT to be set to 'NODE'.",
+    );
+    process.exit(1);
+  }
+  console.log("Running tests in Node.js environment");
+} else {
+  console.error("Unsupported environment.");
+  process.exit(1);
+}
 
 import {
   APP_ID,
