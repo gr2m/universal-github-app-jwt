@@ -54,7 +54,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build universal-github-app-jwt
-        run: npm run build:node
+        run: npm run build
       - name: Run tests
         run: npm test:node
 
@@ -71,7 +71,7 @@ jobs:
           deno-version: v2.x
       - name: Install dependencies
         run: deno install
-      - run: deno run build:default
+      - run: deno run build
       - name: Run tests
         run: deno run test:deno
 
@@ -87,6 +87,6 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Build universal-github-app-jwt
-        run: bun run build:default
+        run: bun run build
       - name: Run tests
         run: bun run test:bun
