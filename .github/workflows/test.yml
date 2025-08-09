@@ -56,7 +56,7 @@ jobs:
       - name: Build universal-github-app-jwt
         run: npm run build
       - name: Run tests
-        run: npm test:node
+        run: npm run test:node
 
   deno:
     runs-on: ubuntu-latest
