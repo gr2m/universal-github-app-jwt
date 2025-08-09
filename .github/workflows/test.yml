@@ -99,3 +99,17 @@ jobs:
         run: bun run build
       - name: Run tests
         run: bun run test:bun
+
+  done:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+      - types
+      - node
+      - deno
+      - bun
+
+    steps:
+      - run: exit 1
+        if: ${{ needs.lint.result != 'success' || needs.types.result != 'success' || needs.node.result != 'success' || needs.deno.result != 'success' || needs.bun.result != 'success' }}
