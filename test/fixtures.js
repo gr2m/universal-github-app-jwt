@@ -1,12 +1,7 @@
-import test from "ava";
-import MockDate from "mockdate";
-
-import githubAppJwt from "../index.js";
-
-const APP_ID = 1;
+export const APP_ID = 1;
 
 // private key in pkcs1 format, as it's provided by GitHub
-const PRIVATE_KEY_PKCS1 = `-----BEGIN RSA PRIVATE KEY-----
+export const PRIVATE_KEY_PKCS1 = `-----BEGIN RSA PRIVATE KEY-----
 MIIEpAIBAAKCAQEA1c7+9z5Pad7OejecsQ0bu3aozN3tihPmljnnudb9G3HECdnH
 lWu2/a1gB9JW5TBQ+AVpum9Okx7KfqkfBKL9mcHgSL0yWMdjMfNOqNtrQqKlN4kE
 p6RD++7sGbzbfZ9arwrlD/HSDAWGdGGJTSOBM6pHehyLmSC3DJoR/CTu0vTGTWXQ
@@ -36,7 +31,7 @@ x//0u+zd/R/QRUzLOw4N72/Hu+UG6MNt5iDZFCtapRaKt6OvSBwy8w==
 
 // pkcs8 version of the key above, which is pkcs1
 // see https://stackoverflow.com/questions/51033786/how-can-i-import-an-rsa-private-key-in-pem-format-for-use-with-webcrypto/51035703#51035703
-const PRIVATE_KEY_PKCS8 = `-----BEGIN PRIVATE KEY-----
+export const PRIVATE_KEY_PKCS8 = `-----BEGIN PRIVATE KEY-----
 MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDVzv73Pk9p3s56
 N5yxDRu7dqjM3e2KE+aWOee51v0bccQJ2ceVa7b9rWAH0lblMFD4BWm6b06THsp+
 qR8Eov2ZweBIvTJYx2Mx806o22tCoqU3iQSnpEP77uwZvNt9n1qvCuUP8dIMBYZ0
@@ -67,7 +62,7 @@ w23mINkUK1qlFoq3o69IHDLz
 
 // openssh version of the key above
 // see https://github.com/gr2m/universal-github-app-jwt/issues/72
-const PRIVATEY_KEY_OPENSSH = `-----BEGIN OPENSSH PRIVATE KEY-----
+export const PRIVATEY_KEY_OPENSSH = `-----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
 NhAAAAAwEAAQAAAQEA1c7+9z5Pad7OejecsQ0bu3aozN3tihPmljnnudb9G3HECdnHlWu2
 /a1gB9JW5TBQ+AVpum9Okx7KfqkfBKL9mcHgSL0yWMdjMfNOqNtrQqKlN4kEp6RD++7sGb
@@ -96,97 +91,5 @@ ehm+uSScfeIEOJPTAAAAAAEC
 -----END OPENSSH PRIVATE KEY-----`;
 
 // see https://runkit.com/gr2m/reproducable-jwt
-const BEARER =
+export const BEARER =
   "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOi0zMCwiZXhwIjo1NzAsImlzcyI6MX0.q3foRa78U3WegM5PrWLEh5N0bH1SD62OqW66ZYzArp95JBNiCbo8KAlGtiRENCIfBZT9ibDUWy82cI4g3F09mdTq3bD1xLavIfmTksIQCz5EymTWR5v6gL14LSmQdWY9lSqkgUG0XCFljWUglEP39H4yeHbFgdjvAYg3ifDS12z9oQz2ACdSpvxPiTuCC804HkPVw8Qoy0OSXvCkFU70l7VXCVUxnuhHnk8-oCGcKUspmeP6UdDnXk-Aus-eGwDfJbU2WritxxaXw6B4a3flTPojkYLSkPBr6Pi0H2-mBsW_Nvs0aLPVLKobQd4gqTkosX3967DoAG8luUMhrnxe8Q";
-
-test("README example for app auth with private key in PKCS#8 format", async (t) => {
-  MockDate.set(0);
-
-  const result = await githubAppJwt({
-    id: APP_ID,
-    privateKey: PRIVATE_KEY_PKCS8,
-  });
-
-  t.deepEqual(result, {
-    appId: APP_ID,
-    expiration: 570,
-    token: BEARER,
-  });
-});
-
-test("README example for app auth with private key in PKCS#1 format", async (t) => {
-  MockDate.set(0);
-
-  const result = await githubAppJwt({
-    id: APP_ID,
-    privateKey: PRIVATE_KEY_PKCS1,
-  });
-
-  t.deepEqual(result, {
-    appId: APP_ID,
-    expiration: 570,
-    token: BEARER,
-  });
-});
-
-test("Throws error if key is OpenSSH", async (t) => {
-  MockDate.set(0);
-
-  try {
-    await githubAppJwt({
-      id: APP_ID,
-      privateKey: PRIVATEY_KEY_OPENSSH,
-    });
-    t.fail("should throw");
-  } catch (error) {
-    t.is(
-      error.message,
-      "[universal-github-app-jwt] Private Key is in OpenSSH format, but only PKCS#8 is supported. See https://github.com/gr2m/universal-github-app-jwt#private-key-formats",
-    );
-  }
-});
-
-test("Include the time difference in the expiration and issued_at field", async (t) => {
-  MockDate.set(0);
-
-  const result = await githubAppJwt({
-    id: APP_ID,
-    privateKey: PRIVATE_KEY_PKCS8,
-    now: 10,
-  });
-
-  t.is(result.appId, APP_ID);
-  t.is(result.expiration, 580);
-
-  const resultPayload = JSON.parse(atob(result.token.split(".")[1]));
-  t.is(resultPayload.exp, 580);
-  t.is(resultPayload.iat, -20);
-});
-
-test("Replace escaped line breaks with actual linebreaks", async (t) => {
-  MockDate.set(0);
-
-  const result = await githubAppJwt({
-    id: APP_ID,
-    privateKey: PRIVATE_KEY_PKCS8.replace(/\n/g, "\\n"),
-  });
-
-  t.deepEqual(result, {
-    appId: APP_ID,
-    expiration: 570,
-    token: BEARER,
-  });
-});
-
-// New test for id set to Client ID
-test("id set to Client ID", async (t) => {
-  MockDate.set(0);
-
-  const result = await githubAppJwt({
-    id: "client_id_string",
-    privateKey: PRIVATE_KEY_PKCS8,
-  });
-
-  t.is(typeof result.token, "string");
-  t.is(result.appId, "client_id_string");
-});
