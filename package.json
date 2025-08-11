@@ -20,9 +20,11 @@
   ],
   "author": "Gregor Martynus (https://github.com/gr2m)",
   "scripts": {
-    "test": "npm run test:code && npm run test:tsc && npm run test:tsd && npm run lint",
-    "test:code": "c8 --100 ava test/node.test.js",
-    "test:deno": "deno test test/deno.test.js",
+    "test": "npm run build && npm run test:node && npm run test:deno && npm run test:edge && npm run test:tsc && npm run test:tsd && npm run lint",
+    "test:node": "TEST_ENVIRONMENT=NODE vitest run",
+    "test:bun": "TEST_ENVIRONMENT=BUN bun test",
+    "test:deno": "TEST_ENVIRONMENT=DENO deno run -A --node-modules-dir npm:vitest@latest run",
+    "test:edge": "TEST_ENVIRONMENT=EDGE vitest run --environment=edge-runtime",
     "test:tsc": "tsc --allowJs --noEmit --esModuleInterop --skipLibCheck --lib es2020 index.js",
     "test:tsd": "tsd",
     "lint": "prettier --check '{src,test}/**/*' README.md package.json",
@@ -35,14 +37,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "ava": "^6.0.0",
-    "c8": "^10.0.0",
+    "@types/node": "^24.1.0",
     "esbuild": "^0.25.0",
-    "mockdate": "^3.0.5",
     "open-cli": "^8.0.0",
     "prettier": "^3.0.0",
     "tsd": "^0.33.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4"
   },
   "release": {
     "branches": [
