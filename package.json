@@ -38,7 +38,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^24.1.0",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.27.0",
     "open-cli": "^8.0.0",
     "prettier": "^3.0.0",
     "tsd": "^0.33.0",
